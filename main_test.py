@@ -1,30 +1,35 @@
 import main
-import io
-import sys
-import re
 
 
 def test_main_1():
-    captureOut = io.StringIO()
-    sys.stdout = captureOut
-    # datastr = '10\n25\n15\n35\n50'
-    # sys.stdin = io.StringIO(datastr)
+    N = 5
+    numbers = main.getRandom(N)
 
-    main.main()
-    sys.stdout = sys.__stdout__
-    print('Captured ', captureOut.getvalue())
-    lines = captureOut.getvalue().split('\n')
-    print(lines)
+    minval = min(numbers)
+    minidx = numbers.index(minval)
+    firstelm = numbers[0]
 
-    rdlst = list(map(int, lines[0].split()))
-    print(rdlst)
-    mval = min(rdlst)
-    midx = rdlst.index(mval)
+    print(f'The original list values {numbers}')
+    main.findMin(numbers)
+    print(f'Min val: {numbers[0]}, Swapped with {numbers[minidx]}')
+    print(f'The list values  after findMin() {numbers}')
 
-    regex_string = r'[\w,\W]*' + str(mval)
-    regex_string += r'[\w,\W]*' + str(midx)
-    regex_string += r'[\w,\W]*'
-    print(regex_string)
-    res = re.search(regex_string, lines[1])
-    assert res != None
-    print(res.group())
+    assert numbers[0] == minval
+    assert numbers[minidx] == firstelm
+
+
+def test_main_2():
+    N = 10
+    numbers = main.getRandom(N)
+
+    minval = min(numbers)
+    minidx = numbers.index(minval)
+    firstelm = numbers[0]
+
+    print(f'The original list values {numbers}')
+    main.findMin(numbers)
+    print(f'Min val: {numbers[0]}, Swapped with {numbers[minidx]}')
+    print(f'The list values  after findMin() {numbers}')
+
+    assert numbers[0] == minval
+    assert numbers[minidx] == firstelm
